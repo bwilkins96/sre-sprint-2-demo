@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # builds ubuntu docker image with rock, paper, scissors game and runs container
 
 echo -e "BUILDING IMAGE: rps-image\n"
