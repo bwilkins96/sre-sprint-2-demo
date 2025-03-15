@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # removes rock, paper, scissors container and image
 
 echo -e "REMOVING CONTAINER: rps-container\n"
