@@ -57,3 +57,48 @@ play_game() {
 }
 
 play_game
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Final Output FOR GAME
+
+#"welcome to our Rock_paper_siccors Game!"
+
+#"Best of ...?"
+
+#"Make your move: (r)ock, (p)aper, or (s)iccors"
+
+# "R>S"
+
+#"S>P"
+
+#"P>S"
+
+# " Computer Chose: " 
+
+#"You Won! Congradulations"
+
+#"Better luck next time!"
+
+#"Would you like to play again?"
+
+# "Computer's score ="
+
+# "Players score ="
