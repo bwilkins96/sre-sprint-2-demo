@@ -14,18 +14,32 @@ random_number() {
     echo $res
 }
 
+lowercase() {
+    local string=$1
+    echo "${choice,,}"
+}
+
 #---------------
 # main functions
 #---------------
 
-# get user choice of "rock", "paper", or "scissors"
+# get user choice of "r", "p", or "s"
 get_user_choice() {
+    local choice=""
 
+    while [[ $choice != ["r""p""s"] ]]
+    do
+        read -p "Enter rock (r), paper (p), or scissors (s): " choice
+        choice=$(lowercase choice)
+        choice=${choice:0:1}
+    done
+
+    echo $choice
 }
 
-# get random choice of "rock", "paper", or "scissors" from computer
+# get random choice of "r", "p", or "s" from computer
 get_random_choice() {
-    local rps_array=("rock" "paper" "scissors")
+    local rps_array=("r" "p" "s")
     local random_index=$( random_number 0 2 )
 
     echo ${rps_array[$random_index]}
