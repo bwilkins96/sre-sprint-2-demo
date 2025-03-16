@@ -138,6 +138,7 @@ main() {
     echo -e "\nWelcome to ROCK_PAPER_SCISSORS!"
     echo "by Austin Russell and Benjamin Wilkins"
     echo "--------------------------------------"
+    echo "press 'ctrl+c' to quit at any time"
 
     local continue="y"
 

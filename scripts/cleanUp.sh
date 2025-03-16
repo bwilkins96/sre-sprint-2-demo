@@ -2,7 +2,7 @@
 
 # removes rock, paper, scissors container and image
 
-echo -e "\nREMOVING CONTAINER: rps-container\n"
+echo -e "REMOVING CONTAINER: rps-container\n"
 
 docker rm rps-container
 
