@@ -16,7 +16,7 @@ random_number() {
 
 lowercase() {
     local string=$1
-    echo "${choice,,}"
+    echo "${string,,}"
 }
 
 #---------------
@@ -30,7 +30,7 @@ get_user_choice() {
     while [[ $choice != ["r""p""s"] ]]
     do
         read -p "Enter rock (r), paper (p), or scissors (s): " choice
-        choice=$(lowercase choice)
+        choice=$(lowercase $choice)
         choice=${choice:0:1}
     done
 
@@ -131,12 +131,30 @@ play_game() {
   fi
 }
 
-play_game
+main() {
+    echo "Welcome to ROCK_PAPER_SCISSORS!"
+    echo "by Austin Russell and Benjamin Wilkins"
+    echo "--------------------------------------"
 
+    local continue="y"
 
+    while [[ $continue == "y" ]]
+    do
+      echo ""
+      
+      play_game
 
+      read -p "Would you like to play again? (y, n) " continue
+      continue=$(lowercase $continue)
+      continue=${continue:0:1}
+    done
+}
 
-
+# Call the main function if this script is run directly
+# (and not sourced by another script)
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  main
+fi
 
 
 
