@@ -49,7 +49,7 @@ get_random_choice() {
 choose_best_of() {
     local best_of_choice=""
 
-    read -p "Best of...? (e.g. 3 for best 2 out of 3) " best_of_choice
+    read -p "Best of...? " best_of_choice
 
     echo $best_of_choice
 }
@@ -82,28 +82,30 @@ decide_winner() {
 # run rock, paper, scissors game
 play_game() {
   # Prompt for best of X
-  best_of=$(choose_best_of)
+  local best_of=$(choose_best_of)
   
   # Calculate needed wins
-  wins_needed=$( get_wins_needed $best_of )
+  local wins_needed=$( get_wins_needed $best_of )
 
-  player_score=0
-  computer_score=0
+  echo -e "Playing best $wins_needed out of $best_of!\n"
+
+  local player_score=0
+  local computer_score=0
 
   # Loop until someone reaches the required number of wins
   while [[ $player_score -lt $wins_needed && $computer_score -lt $wins_needed ]]; do
     
     # 1. Get user move
-    user_move=$(get_user_choice)   # e.g., "rock", "paper", "scissors"
+    local user_move=$(get_user_choice)   # e.g., "rock", "paper", "scissors"
     
     # 2. Get computer move
-    computer_move=$(get_random_choice)
+    local computer_move=$(get_random_choice)
     
     echo "You chose: $user_move"
     echo "Computer chose: $computer_move"
 
     # 3. Compare moves and update scores
-    winner=$(decide_winner "$user_move" "$computer_move") 
+    local winner=$(decide_winner "$user_move" "$computer_move") 
 
     case $winner in
       "user")
@@ -119,7 +121,7 @@ play_game() {
         ;;
     esac
 
-    echo "Score -> You: $player_score | Computer: $computer_score"
+    echo -e "\nScore -> You: $player_score | Computer: $computer_score"
     echo "---------------------------------"
   done
 
@@ -132,7 +134,7 @@ play_game() {
 }
 
 main() {
-    echo "Welcome to ROCK_PAPER_SCISSORS!"
+    echo -e "\nWelcome to ROCK_PAPER_SCISSORS!"
     echo "by Austin Russell and Benjamin Wilkins"
     echo "--------------------------------------"
 
@@ -144,10 +146,12 @@ main() {
       
       play_game
 
-      read -p "Would you like to play again? (y, n) " continue
+      read -p $'\n'"Would you like to play again? (y, n) " continue
       continue=$(lowercase $continue)
       continue=${continue:0:1}
     done
+
+    echo -e "\nThank you for playing!\n"
 }
 
 # Call the main function if this script is run directly
