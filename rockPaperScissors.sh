@@ -45,15 +45,90 @@ get_random_choice() {
     echo ${rps_array[$random_index]}
 }
 
+# get user choice for best out of X
+choose_best_of() {
+    local best_of_choice=""
 
-# run 1 round of rock, paper, scissors
-play_round() {
+    read -p "Best of...? (e.g. 3 for best 2 out of 3) " best_of_choice
 
+    echo $best_of_choice
+}
+
+# calculate how many wins are needed (e.g., best of 5 requires 3 wins)
+get_wins_needed() {
+    local number=$1
+
+    echo $(( ($number / 2) + 1 ))
+}
+
+# get the winner of the match from the user and computer moves
+decide_winner() {
+    local user_move=$1
+    local computer_move=$2
+
+    if [[ $user_move == $computer_move ]]
+    then
+        echo "tie"
+    elif [[ $user_move == "r" && $computer_move == "s" ]] || \
+         [[ $user_move == "p" && $computer_move == "r" ]] || \
+         [[ $user_move == "s" && $computer_move == "p" ]] 
+    then
+        echo "user"
+    else
+        echo "computer"
+    fi
 }
 
 # run rock, paper, scissors game
 play_game() {
+  # Prompt for best of X
+  best_of=$(choose_best_of)
+  
+  # Calculate needed wins
+  wins_needed=$( get_wins_needed $best_of )
 
+  player_score=0
+  computer_score=0
+
+  # Loop until someone reaches the required number of wins
+  while [[ $player_score -lt $wins_needed && $computer_score -lt $wins_needed ]]; do
+    
+    # 1. Get user move
+    user_move=$(get_user_choice)   # e.g., "rock", "paper", "scissors"
+    
+    # 2. Get computer move
+    computer_move=$(get_random_choice)
+    
+    echo "You chose: $user_move"
+    echo "Computer chose: $computer_move"
+
+    # 3. Compare moves and update scores
+    winner=$(decide_winner "$user_move" "$computer_move") 
+
+    case $winner in
+      "user")
+        ((player_score++))
+        echo "You win this round!"
+        ;;
+      "computer")
+        ((computer_score++))
+        echo "Computer wins this round!"
+        ;;
+      "tie")
+        echo "It's a tie!"
+        ;;
+    esac
+
+    echo "Score -> You: $player_score | Computer: $computer_score"
+    echo "---------------------------------"
+  done
+
+  # Announce the final result
+  if [[ $player_score -ge $wins_needed ]]; then
+    echo "Congratulations! You won the match."
+  else
+    echo "The computer won the match. Better luck next time!"
+  fi
 }
 
 play_game
