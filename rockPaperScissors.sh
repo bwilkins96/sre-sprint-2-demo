@@ -101,6 +101,7 @@ play_game() {
     # 2. Get computer move
     local computer_move=$(get_random_choice)
     
+    echo ""
     echo "You chose: $user_move"
     echo "Computer chose: $computer_move"
 
