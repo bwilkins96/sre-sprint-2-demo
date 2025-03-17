@@ -79,6 +79,21 @@ decide_winner() {
     fi
 }
 
+# map "r" -> "rock", "p" -> "paper", and "s" -> "scissors" 
+rps_string() {
+    local rps_char=$1
+
+    if [[ $rps_char == "r" ]]
+    then
+        echo "rock"
+    elif [[ $rps_char == "p" ]]
+    then
+        echo "paper"
+    else
+        echo "scissors"
+    fi
+}
+
 # run rock, paper, scissors game
 play_game() {
   # Prompt for best of X
@@ -102,8 +117,8 @@ play_game() {
     local computer_move=$(get_random_choice)
     
     echo ""
-    echo "You chose: $user_move"
-    echo "Computer chose: $computer_move"
+    echo "You chose $(rps_string $user_move)"
+    echo "Computer chose $(rps_string $computer_move)"
 
     # 3. Compare moves and update scores
     local winner=$(decide_winner "$user_move" "$computer_move") 
