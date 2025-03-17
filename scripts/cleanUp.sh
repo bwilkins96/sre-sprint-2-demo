@@ -9,3 +9,7 @@ docker rm rps-container
 echo -e "\nREMOVING IMAGE: rps-image\n"
 
 docker rmi rps-image
+
+echo -e "\nCLEARING BUILD CACHE\n"
+
+docker buildx prune -f
