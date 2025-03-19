@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # starts and stops docker container with rock, paper, scissors game written in bash
 
 # must be run inside 'sre-sprint-2-demo' folder
